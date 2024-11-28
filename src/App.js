@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
+import Header from './Components/Header';
+import About from './Components/About';
+import Projects from './Components/Projects';
+import Contact from './Components/Contact';
+import Tetris from './Components/Tetris'; 
 import './App.css';
 
 function App() {
+  const [interactiveMode, setInteractiveMode] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header interactiveMode={interactiveMode} setInteractiveMode={setInteractiveMode} />
+      {interactiveMode ? (
+        <Tetris />  
+      ) : (
+        <>
+          <About />
+          <Projects />
+          <Contact />
+        </>
+      )}
     </div>
   );
 }
