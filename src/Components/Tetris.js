@@ -34,8 +34,8 @@ const TetrisComponent = () => {
   };
 
   return (
-    <div className="tetris-container">
-      <h2 className='text-2xl font-bold text-gray-800 px-5 py-5'>
+    <div className="tetris-container bg-gray-100">
+      <h2 className='text-2xl font-bold text-gray-800 px-5 py-5 pr-7'>
         <FontAwesomeIcon icon={faGamepad} /> Tetris Game <FontAwesomeIcon icon={faGamepad} />
       </h2>
       <Tetris

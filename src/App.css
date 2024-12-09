@@ -102,7 +102,7 @@
 }
 .points{
   position:absolute;
-  top:185px;
+  top:235px;
   display:flex;
   justify-content: space-between;
   width: 500px;

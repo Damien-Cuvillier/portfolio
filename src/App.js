@@ -7,6 +7,7 @@ import Contact from './Components/Contact';
 import Tetris from './Components/Tetris'; 
 import './App.css';
 import './tailwind.css';
+import ContactForm from './Components/Footer';
 
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
@@ -20,7 +21,7 @@ function App() {
         <>
           <About />
           <Projects />
-          <Contact />
+          <ContactForm />
         </>
       )}
     </div>
