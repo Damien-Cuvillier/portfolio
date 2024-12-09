@@ -6,6 +6,7 @@ import Projects from './Components/Projects';
 import Contact from './Components/Contact';
 import Tetris from './Components/Tetris'; 
 import './App.css';
+import './tailwind.css';
 
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);

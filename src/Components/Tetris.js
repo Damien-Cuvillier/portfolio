@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Tetris from 'react-tetris';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown,faHorizontalRule } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 
 // Style pour la modale (ajustez selon vos besoins)
