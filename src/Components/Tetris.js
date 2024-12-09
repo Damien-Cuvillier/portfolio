@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import Tetris from 'react-tetris';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown, faGamepad} from '@fortawesome/free-solid-svg-icons';
+import '../App.css'
 
-
-// Style pour la modale (ajustez selon vos besoins)
+// Style pour la modale
 const customStyles = {
   content: {
     top: '50%',
@@ -18,6 +18,7 @@ const customStyles = {
     padding: '20px',
     borderRadius: '10px',
     textAlign: 'center',
+    
   },
 };
 
@@ -34,7 +35,9 @@ const TetrisComponent = () => {
 
   return (
     <div className="tetris-container">
-      <h1>Tetris</h1>
+      <h2 className='text-2xl font-bold text-gray-800 px-5 py-5'>
+        <FontAwesomeIcon icon={faGamepad} /> Tetris Game <FontAwesomeIcon icon={faGamepad} />
+      </h2>
       <Tetris
         keyboardControls={{
           down: 'MOVE_DOWN',
@@ -75,7 +78,7 @@ const TetrisComponent = () => {
                   <p>{points}</p>
                 </div>
                 <div>
-                  <p>Lines</p>
+                  <p>Lignes</p>
                   <p>{linesCleared}</p>
                 </div>
               </div>
@@ -87,7 +90,7 @@ const TetrisComponent = () => {
                 <PieceQueue />
               </div>
               <div className="controls">
-                <h3>Controls</h3>
+                <h3 className='font-bold text-gray-800 py-5'>Controls</h3>
                 <div className="control-row">
                   <FontAwesomeIcon icon={faArrowUp} /> Rotate
                 </div>
@@ -111,10 +114,10 @@ const TetrisComponent = () => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={customStyles}   
         contentLabel="Game Over Modal"
       >
-        <h2>Game Over</h2>
+        <h2 className='text-2xl font-bold text-gray-800 px-5 py-5 text-red-500'>Game Over</h2>
         <button
           onClick={() => {
             if (gameController) {
@@ -123,7 +126,7 @@ const TetrisComponent = () => {
             }
           }}
         >
-          Rejouer
+          <h3 className='text-2xl font-bold text-gray-800 py-5 text-green-800'>Rejouer</h3>
         </button>
       </Modal>
     </div>

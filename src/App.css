@@ -6,32 +6,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -63,6 +37,7 @@
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding-top: 100px;
 }
 
 .held-piece-container, .piece-queue-container {
@@ -76,12 +51,11 @@
   border-radius: 10px;
 }
 .held-piece-container{
-  margin-bottom: 415px;
+  margin-bottom: 380px;
 
 }
-.piece-queue-container{
-  margin-top: 85px;
-  size:10%;
+.table-view{
+  border:solid 1px #282c34;
 }
 .game-over {
   margin-top: 1rem;
@@ -128,7 +102,7 @@
 }
 .points{
   position:absolute;
-  top:225px;
+  top:185px;
   display:flex;
   justify-content: space-between;
   width: 500px;
@@ -147,6 +121,21 @@
 .controls{
   position: relative;
   text-align: left;
-  right: 550px;
+  right: 470px;
   top:150px;
 }
+
+/* .modal-overlay {
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-content-open {
+  opacity: 1;
+  transform: scale(1);
+} */

@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         'custom-blue': '#1c92d2',
         'custom-red': '#f7b733',
+        'custom-black' : '#282c34',
       },
     },
   },
