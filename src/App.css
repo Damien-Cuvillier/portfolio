@@ -38,6 +38,7 @@
   justify-content: center;
   margin: auto;
   padding-top: 100px;
+  padding-left: 150px;
 }
 
 .held-piece-container, .piece-queue-container {
@@ -105,8 +106,8 @@
   top:235px;
   display:flex;
   justify-content: space-between;
-  width: 500px;
-  padding-right: 75px;
+  width: 600px;
+  padding-right: 170px;
 }
 .points > div {
   text-align: center;
@@ -122,20 +123,63 @@
   position: relative;
   text-align: left;
   right: 470px;
-  top:150px;
+  top:120px;
 }
 
-/* .modal-overlay {
-  transition: opacity 0.3s ease;
+.swal2-confirm {
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+}
+.restart-button {
+  position:relative;
+  top:270px;
+  right:375px;
+  color: #282c34;
+}
+.item{
+  width: 500px;
+  height: 500px;
 }
 
-.modal-content {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.carousel .slide img {
+  width: 100%;
+  height: 500px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+  object-fit: scale-down; /* Cela assure que l'image remplit l'espace sans déformer le rapport hauteur/largeur */
 }
 
-.modal-content-open {
-  opacity: 1;
-  transform: scale(1);
-} */
+.carousel .legend {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+}
+
+.carousel .legend h3 {
+  margin: 0;
+}
+
+.carousel .legend p {
+  margin: 5px 0 0;
+}
+.carousel .slide .legend{
+  background-color: darkslategray;
+}
+
+.carousel-status{
+  display: none;
+}
+
+/* Applique une taille uniforme aux vignettes (thumbs) */
+.carousel .thumb {
+  width: 80px; /* Largeur de chaque vignette */
+  height: 80px; /* Hauteur de chaque vignette */
+  object-fit: cover; /* Assurez-vous que l'image remplit l'espace sans déformation */
+  margin: 7px; /* Un petit espace entre les vignettes */
+  border-radius: 8px; /* Si vous voulez des coins arrondis pour les vignettes */
+  align-content: center;
+}
+
+/* Optionnel : style pour lorsque la vignette est active */
+.carousel .thumb.selected {
+  border: 2px solid darkslategray; /* Ajoute une bordure verte pour la vignette sélectionnée */
+  
+}

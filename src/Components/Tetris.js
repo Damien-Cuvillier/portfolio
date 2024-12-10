@@ -1,40 +1,39 @@
-// src/Components/TetrisComponent.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tetris from 'react-tetris';
-import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown, faGamepad} from '@fortawesome/free-solid-svg-icons';
-import '../App.css'
-
-// Style pour la modale
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    
-  },
-};
-
-Modal.setAppElement('#root'); // Pour l'accessibilité
+import { faArrowUp, faArrowRight, faArrowLeft, faArrowDown, faGamepad } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
+import '../App.css';
 
 const TetrisComponent = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [gameController, setGameController] = useState(null);
   const [gameState, setGameState] = useState(null);
 
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
+  useEffect(() => {
+    if (gameState === 'LOST' && gameController) {
+      Swal.fire({
+        title: 'Game Over',
+        text: 'Voulez-vous rejouer ?',
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Rejouer',
+        cancelButtonText: 'Annuler',
+        customClass: {
+          title: 'text-2xl font-bold text-gray-800 text-red-500',
+          confirmButton: 'text-2xl font-bold text-gray-800',
+          cancelButton: 'text-2xl font-bold text-gray-800',
+          popup: 'rounded-lg p-4'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          gameController.restart();
+        }
+      });
+    }
+  }, [gameState, gameController]);
 
   return (
-    <div className="tetris-container bg-gray-100">
+    <div className="tetris-container bg-gray-100 py-1">
       <h2 className='text-2xl font-bold text-gray-800 px-5 py-5 pr-7'>
         <FontAwesomeIcon icon={faGamepad} /> Tetris Game <FontAwesomeIcon icon={faGamepad} />
       </h2>
@@ -64,11 +63,6 @@ const TetrisComponent = () => {
           // Mise à jour de l'état du contrôleur et de l'état du jeu
           if (gameController !== controller) setGameController(controller);
           if (gameState !== state) setGameState(state);
-
-          // Ouvrir la modale si le jeu est perdu
-          if (state === 'LOST' && !modalIsOpen) {
-            setModalIsOpen(true);
-          }
 
           return (
             <div className="tetris-game">
@@ -104,31 +98,21 @@ const TetrisComponent = () => {
                   <FontAwesomeIcon icon={faArrowDown} /> Soft Drop
                 </div>
                 <div className="control-row">
-                 ▬ Drop
+                  ▬ Drop
                 </div>
+                <div>"C" hold</div>
+                <div>"P" Pause</div>
               </div>
+              <button
+                onClick={() => gameController && gameController.restart()}
+                className="restart-button text-gray-600 mt-5 bg-green-200 text-white py-2 px-4 rounded"
+              >
+                Rejouer
+              </button>
             </div>
           );
         }}
       </Tetris>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}   
-        contentLabel="Game Over Modal"
-      >
-        <h2 className='text-2xl font-bold text-gray-800 px-5 py-5 text-red-500'>Game Over</h2>
-        <button
-          onClick={() => {
-            if (gameController) {
-              gameController.restart();
-              closeModal();
-            }
-          }}
-        >
-          <h3 className='text-2xl font-bold text-gray-800 py-5 text-green-800'>Rejouer</h3>
-        </button>
-      </Modal>
     </div>
   );
 };
