@@ -1,13 +1,12 @@
-// src/App.js
 import React, { useState } from 'react';
 import Header from './Components/Header';
 import About from './Components/About';
 import Projects from './Components/Projects';
-import Contact from './Components/Contact';
 import Tetris from './Components/Tetris'; 
 import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
+import TestScene from './Components/TestScene';
 
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
@@ -21,7 +20,6 @@ function App() {
         <>
           <About />
           <Projects />
-          
           <ContactForm />
         </>
       )}
