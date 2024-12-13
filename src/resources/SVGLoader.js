@@ -145,7 +145,7 @@ SVGLoader.prototype = {
               if (j === 0 && doSetFirstPoint === true) firstPoint.copy(point)
             }
             break
-            
+
           case 'H':
             var numbers = parseFloats(data)
             for (var j = 0, jl = numbers.length; j < jl; j++) {

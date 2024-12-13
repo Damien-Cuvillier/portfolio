@@ -6,7 +6,6 @@ import Tetris from './Components/Tetris';
 import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
-import TestScene from './Components/TestScene';
 
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
