@@ -1,0 +1,29 @@
+import React from 'react';
+import FrontEndImg from './FrondEndImg'
+import BackEndImg from './BackEndImg'
+import '../App.css'
+
+function Projects() {
+  return (
+    <section className='flex items-center flex-col' id="Competences">
+      <h2 className='text-3xl font-bold text-gray-800 px-5 py-5'>Mes Compétences</h2>
+      <div className="competences-grid py-24 w-full mw-12">
+        <div className="competence-item flex flex-row justify-around w-full max-w-screen-2xl mx-auto">
+          <div>
+          <FrontEndImg />
+          <h3 className=' text-3xl font-bold text-gray-800 px-5 py-10'>Front-End</h3>
+          </div>
+          <div className="flux">
+            <div className="atom"></div>
+          </div>
+          <div >
+          <BackEndImg />
+          <h3 className=' text-3xl font-bold text-gray-800 px-5 py-10'>Back-end</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Projects;

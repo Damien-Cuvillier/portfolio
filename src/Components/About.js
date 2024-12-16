@@ -6,7 +6,7 @@ import { deg } from '../resources/helpers';
 
 function About() {
   return (
-    <div className="about p-52 h-full my-10 w-full max-w-1280">
+    <div id='about' className="about p-52 h-full my-10 w-full max-w-1280">
       <Canvas
         frameloop="demand"
         camera={{ fov: 75, position: [0, 0, 5], rotation: [0, deg(-20), deg(180)], near: 0.1, far: 20000 }}

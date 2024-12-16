@@ -22,9 +22,9 @@ const ContactForm = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <div>
+        <div className='mt-20 pb-12'>
         <Form className="w-full max-w-sm mx-auto">
-        <h2 className='text-3xl font-bold text-gray-800 px-5 py-5'>Contactez moi !</h2>
+        <h2 id='contacts' className='text-3xl font-bold text-gray-800 px-5 py-5'>Contactez moi !</h2>
         <p className='font-bold text-gray-800 pb-5 '>Des questions ou des projets en vue ? Envoyez moi simplement un message ! </p>
           <div className="mb-4">
             <label htmlFor="name"></label>

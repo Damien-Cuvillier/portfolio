@@ -183,3 +183,51 @@
   border: 2px solid darkslategray; 
   
 }
+.flux{
+font-size: 125%;
+background-color: whitesmoke;
+box-sizing: border-box;
+word-wrap: break-word;
+transition: box-shadow .2s;
+display: block;
+top: 50%;
+left: 20%;
+transform: translateX(-50%);
+width: 150%;
+overflow: hidden;
+position: relative;
+height: 4px;
+margin:auto;
+}
+.flux::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(50% - 20px); /* Ajuste la largeur pour atteindre le centre des images */
+  height: 4px;
+  transform: translateY(-50%);
+}
+.atom {
+  position: absolute;
+  width: 25px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: black;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: moveAtom 4s ease-in-out infinite alternate;
+}
+
+@keyframes moveAtom {
+  0% {
+    left: 0; /* Commence à gauche */
+  }
+  50% {
+    left: 100%; /* Déplace l'atome à droite */
+    transform: translateX(-100%) translateY(-50%);
+  }
+  100% {
+    left: 0; /* Retourne à gauche */
+  }
+}

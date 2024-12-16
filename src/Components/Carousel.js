@@ -50,12 +50,12 @@ const ProjectsCarousel = () => {
   return (
     <Carousel showArrows={true} autoPlay={true} infiniteLoop={true}>
       {projects.map((project, index) => (
-        <div className='bg-gray-100 max-w-full flex-col mx-auto' key={index}>
+        <div className='bg-gray-100 max-w-full flex-col mx-auto h-full' key={index}>
           <img src={project.imageUrl} alt={project.title} />
-          <div className="legend">
+          <div className="legend flex flex-col items-center h-20">
             <h3>{project.title}</h3>
             {project.projectURL && (
-              <a href={project.projectURL} target="_blank" rel="noopener noreferrer">
+              <a className="py-12 text-sm"href={project.projectURL} target="_blank" rel="noopener noreferrer">
                 GitHub <FontAwesomeIcon icon={faGithub} />
               </a>
             )}

@@ -11,9 +11,10 @@ function Header({ interactiveMode, setInteractiveMode }) {
           <a href="/dashboard" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">
             <img src="/images/logo.jpg" alt="Accueil" className="w-8 h-8 object-contain rounded-full"/>
           </a>
-          <a href="/team" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-12">A propos</a>
-          <a href="/projects" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-40">Projets</a>
-          <a href="/contacts" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-64 ">Contacts</a>
+          <a href="#about" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-12">A propos</a>
+          <a href="#Competences" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-36">Compétences</a>
+          <a href="#projects" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-72">Projets</a>
+          <a href="#contacts" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-96 ">Contacts</a>
         </div>
         <div className="flex items-center">
           <a href="https://www.linkedin.com/in/damien-cuvillier-46b6691b1/" className="text-slate-700 hover:text-slate-900 mx-12">

@@ -6,7 +6,7 @@ import Tetris from './Components/Tetris';
 import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
-
+import Competences from './Components/Competences'
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
 
@@ -18,6 +18,7 @@ function App() {
       ) : (
         <>
           <About />
+          <Competences />
           <Projects />
           <ContactForm />
         </>
