@@ -42,7 +42,7 @@ body {
   overflow: hidden;
 }
 
-span.header {
+span.header-about {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
   position: absolute;
@@ -56,7 +56,7 @@ span.header {
   left: 50px;
 }
 
-span.header-left {
+span.header-about-left {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
   position: absolute;
@@ -69,7 +69,7 @@ span.header-left {
   width: 200px;
 }
 
-div.header-major {
+div.header-about-major {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
   position: absolute;
@@ -82,12 +82,12 @@ div.header-major {
   justify-content: center;
 }
 
-div.header-major > span {
+div.header-about-major > span {
   font-size: 15em;
 }
 
 @media only screen and (max-width: 750px) {
-  span.header {
+  span.header-about {
     top: 200px;
     left: 60px;
     font-size: 4em;

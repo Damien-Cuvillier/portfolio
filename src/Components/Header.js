@@ -3,21 +3,33 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
-function Header({interactiveMode, setInteractiveMode }) {
+function Header({ interactiveMode, setInteractiveMode }) {
   return (
-    <header>
-      <nav className="flex justify-center space-x-4">
-        <a href="/dashboard" className="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">
-        <img src="/images/logo.jpg" alt='Accueil' className="w-8 h-8 object-contain rounded-full"/></a>
-        <a href="/team" className="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">A propos</a>
-        <a href="/projects" className="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Projets</a>
-        <a href="/contacts" className="font-bold px-3 py-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">Contacts</a>
-        <a href="https://www.linkedin.com/in/damien-cuvillier-46b6691b1/"><FontAwesomeIcon icon={faLinkedin} /></a>
-        <a href="https://github.com/Damien-Cuvillier"><FontAwesomeIcon icon={faGithub} /></a>
-        <button className="mt-6 px-4 py-2 my-10 bg-blue-500 text-white rounded hover:bg-blue-600" onClick={() => setInteractiveMode(prev => !prev)}>
-        {interactiveMode ? 'Mode classique' : 'Mode interactif'}
-      </button>
-</nav>
+    <header className="bg-white shadow fixed w-full z-10 top-0 left-0">
+      <nav className="flex justify-between items-center px-4 py-2 max-w-7xl mx-auto">
+        <div className="flex items-center">
+          <a href="/dashboard" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">
+            <img src="/images/logo.jpg" alt="Accueil" className="w-8 h-8 object-contain rounded-full"/>
+          </a>
+          <a href="/team" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-12">A propos</a>
+          <a href="/projects" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-40">Projets</a>
+          <a href="/contacts" className="font-bold text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 px-3 py-2 mx-64 ">Contacts</a>
+        </div>
+        <div className="flex items-center">
+          <a href="https://www.linkedin.com/in/damien-cuvillier-46b6691b1/" className="text-slate-700 hover:text-slate-900 mx-12">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+          <a href="https://github.com/Damien-Cuvillier" className="text-slate-700 hover:text-slate-900 mr-18">
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
+          <button
+            className=" ml-20 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => setInteractiveMode(prev => !prev)}
+          >
+            {interactiveMode ? 'Mode classique' : 'Mode interactif'}
+          </button>
+        </div>
+      </nav>
     </header>
   );
 }
