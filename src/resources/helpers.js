@@ -7,7 +7,7 @@ const doubleSide = THREE.DoubleSide;
 const deg = THREE.MathUtils.degToRad;
 const colors = ['#21242d', '#ea5158', '#0d4663', '#ffbcb7', '#2d4a3e', '#8bd8d2'];
 
-const svgNames = ['night', 'city', 'morning', 'woods', 'beach', 'tubes'];
+const svgNames = ['night', 'city', 'morning', 'woods', 'beach'];
 const svgs = svgNames.map(name => `/images/svg/${name}.svg`).map(
   url =>
     new Promise(resolve =>
@@ -29,4 +29,4 @@ const svgs = svgNames.map(name => `/images/svg/${name}.svg`).map(
     )
 );
 
-export { svgs, colors, deg, doubleSide };
+export { svgs, colors, deg, doubleSide, svgNames };
