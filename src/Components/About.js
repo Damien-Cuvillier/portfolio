@@ -7,6 +7,7 @@ import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
 import '../resources/styles.css';
 import { ShapeGeometry } from 'three';
 import { extend } from '@react-three/fiber';
+import { useSpring } from 'react-spring';
 
 // Liste des fichiers SVG
 const svgNames = ['city', 'morning', 'woods', 'beach'];
@@ -27,12 +28,14 @@ function Shape({ shape, position, color, opacity, index }) {
   );
 }
 
-
 function Scene() {
   const [shapes, setShapes] = useState([]);
   const [currentSVG, setCurrentSVG] = useState(0);
 
-  // Charge les SVGs à la demande
+  // Liste des couleurs pour le fond
+  const colors = ['#535763', '#e0757a', '#2d4a3e', '#8bd8d2' ];
+  
+  // Charge les SVG à la demande
   const loadSVG = (svgUrl) => {
     return new Promise((resolve, reject) => {
       console.log(`Loading SVG from ${svgUrl}`);
@@ -67,40 +70,48 @@ function Scene() {
 
   useEffect(() => {
     let timeoutId;
-  
     const loadNextSVG = () => {
       setCurrentSVG(prev => (prev + 1) % svgUrls.length); // Change SVG à la fin de chaque transition
       timeoutId = setTimeout(loadNextSVG, 10000); // Change toutes les 10 secondes
     };
-  
     loadNextSVG(); // Démarre la première transition
-  
     return () => clearTimeout(timeoutId);
   }, []); // Dépendance vide pour que cela ne se déclenche qu'une fois au démarrage
-  
+
+  // Animation de la couleur de fond
+  const { color } = useSpring({ color: colors[currentSVG] });
 
   const transitions = useTransition(shapes, {
     from: { position: [0, 50, -200], opacity: 0 },
     enter: { position: [0, 0, 0], opacity: 1 },
     leave: { position: [0, -50, 10], opacity: 0 },
     keys: item => item.shape.uuid,
-    trail: 2, // Réduit l'écart entre les éléments animés pour améliorer la performance
-    config: { mass: 1, tension: 180, friction: 12 }, // Ajuste la vitesse des animations
+    trail: 2,
+    config: { mass: 1, tension: 180, friction: 12 },
     lazy: true,
   });
 
   return (
-    <group position={[1600, -700, 0]} rotation={[0, THREE.MathUtils.degToRad(180), 0]}>
-      {transitions((props, item) => (
-        <Shape key={item.shape.uuid} {...item} {...props} />
-      ))}
-    </group>
+    <>
+      {/* Fond dynamique */}
+      <a.mesh scale={[20000, 20000, 1]} rotation={[0, THREE.MathUtils.degToRad(-20), 0]}>
+        <planeGeometry attach="geometry" args={[1, 1]} />
+        <a.meshPhongMaterial attach="material" color={color} depthTest={false} />
+      </a.mesh>
+
+      {/* SVGs animés */}
+      <group position={[1600, -700, 0]} rotation={[0, THREE.MathUtils.degToRad(180), 0]}>
+        {transitions((props, item) => (
+          <Shape key={item.shape.uuid} {...item} {...props} />
+        ))}
+      </group>
+    </>
   );
 }
 
 function About() {
   return (
-    <div className="main about p-60 my-10 w-full max-w-1280">
+    <div className="about w-full h-full">
       <Canvas
         camera={{
           fov: 80,
@@ -108,12 +119,13 @@ function About() {
           rotation: [0, THREE.MathUtils.degToRad(-20), THREE.MathUtils.degToRad(180)],
           far: 20000,
         }}
-        style={{ border: '2px solid red', height:'500px', width:'100%' }}
+        style={{ display:'block', height:'955px', width:'100%', margin:'auto' }}
       >
         <ambientLight intensity={0.5} />
         <spotLight intensity={0.5} position={[300, 300, 4000]} />
         <Scene />
       </Canvas>
+      <span class="header-about">Damien Cuvillier</span>
     </div>
   );
 }
