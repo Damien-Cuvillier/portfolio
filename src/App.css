@@ -6,14 +6,6 @@
   text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* src/Components/Tetris.scss */
 .tetris-container {
   display: flex;
@@ -185,17 +177,15 @@
 }
 .flux{
 font-size: 125%;
-background-color: whitesmoke;
 box-sizing: border-box;
 word-wrap: break-word;
 transition: box-shadow .2s;
 display: block;
-top: 50%;
-left: 20%;
+top: 48%;
+left: 50%;
 transform: translateX(-50%);
-width: 150%;
-overflow: hidden;
-position: relative;
+width: 800px;
+position: absolute;
 height: 4px;
 margin:auto;
 }
