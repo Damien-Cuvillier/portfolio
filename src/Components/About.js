@@ -9,19 +9,24 @@ import { ShapeGeometry } from 'three';
 import { extend } from '@react-three/fiber';
 
 // Liste des fichiers SVG
-const svgNames = ['night', 'city', 'morning', 'woods', 'beach'];
+const svgNames = ['city', 'morning', 'woods', 'beach'];
 const svgUrls = svgNames.map(name => `/images/svg/${name}.svg`);
 
 extend({ ShapeGeometry });
 
 function Shape({ shape, position, color, opacity, index }) {
+  const transformPosition = index === 0 ? [position[0] + 100, position[1] + 100, position[2]] : position;
   return (
-    <a.mesh position={position.to((x, y, z) => [x, y, z + -index * 100, 0, 0])}>
+    <a.mesh 
+      position={transformPosition}  // Appliquer la position modifiée conditionnellement
+      scale={[2, 2, 2]}  // Agrandir l'image SVG
+    >
       <a.meshPhongMaterial attach="material" color={color} opacity={opacity} side={THREE.DoubleSide} depthWrite={false} transparent />
       <primitive attach="geometry" object={new ShapeGeometry(shape)} />
     </a.mesh>
   );
 }
+
 
 function Scene() {
   const [shapes, setShapes] = useState([]);
