@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useTransition, a } from '@react-spring/three';
 import flatten from 'lodash-es/flatten';
@@ -18,9 +18,9 @@ extend({ ShapeGeometry });
 function Shape({ shape, position, color, opacity, index }) {
   const transformPosition = index === 0 ? [position[0] + 100, position[1] + 100, position[2]] : position;
   return (
-    <a.mesh 
-      position={transformPosition}  // Appliquer la position modifiée conditionnellement
-      scale={[2, 2, 2]}  // Agrandir l'image SVG
+    <a.mesh
+      position={transformPosition}
+      scale={[2, 2, 2]}
     >
       <a.meshPhongMaterial attach="material" color={color} opacity={opacity} side={THREE.DoubleSide} depthWrite={false} transparent />
       <primitive attach="geometry" object={new ShapeGeometry(shape)} />
@@ -28,57 +28,54 @@ function Shape({ shape, position, color, opacity, index }) {
   );
 }
 
+const loadSVG = (svgUrl) => {
+  return new Promise((resolve, reject) => {
+    new SVGLoader().load(
+      svgUrl,
+      data => {
+        if (data && data.paths) {
+          resolve(flatten(data.paths.map((path, index) =>
+            path.toShapes(true).map(shape => ({ shape, color: path.color, index })))
+          ));
+        } else {
+          reject(new Error('Failed to load SVG: No paths found'));
+        }
+      },
+      undefined,
+      error => {
+        reject(new Error('Failed to load SVG'));
+      }
+    );
+  });
+};
+
 function Scene() {
   const [shapes, setShapes] = useState([]);
   const [currentSVG, setCurrentSVG] = useState(0);
+  const colors = ['#535763', '#e0757a', '#2d4a3e', '#8bd8d2'];
 
-  // Liste des couleurs pour le fond
-  const colors = ['#535763', '#e0757a', '#2d4a3e', '#8bd8d2' ];
-  
-  // Charge les SVG à la demande
-  const loadSVG = (svgUrl) => {
-    return new Promise((resolve, reject) => {
-      console.log(`Loading SVG from ${svgUrl}`);
-      new SVGLoader().load(
-        svgUrl,
-        data => {
-          if (data && data.paths) {
-            console.log('SVG loaded successfully:', data);
-            resolve(flatten(data.paths.map((path, index) =>
-              path.toShapes(true).map(shape => ({ shape, color: path.color, index })))
-            ));
-          } else {
-            console.error('Failed to load SVG: No paths found');
-            reject(new Error('Failed to load SVG: No paths found'));
-          }
-        },
-        undefined,
-        error => {
-          console.error('Error loading SVG:', error);
-          reject(new Error('Failed to load SVG'));
-        }
-      );
-    });
-  };
-
-  useEffect(() => {
+  const handleSVGChange = useCallback(async () => {
     const svgUrl = svgUrls[currentSVG];
-    loadSVG(svgUrl)
-      .then(setShapes)
-      .catch(error => console.error('Error loading SVG:', error));
+    try {
+      const newShapes = await loadSVG(svgUrl);
+      setShapes(newShapes);
+    } catch (error) {
+      console.error('Error loading SVG:', error);
+    }
   }, [currentSVG]);
 
   useEffect(() => {
-    let timeoutId;
-    const loadNextSVG = () => {
-      setCurrentSVG(prev => (prev + 1) % svgUrls.length); // Change SVG à la fin de chaque transition
-      timeoutId = setTimeout(loadNextSVG, 10000); // Change toutes les 10 secondes
-    };
-    loadNextSVG(); // Démarre la première transition
-    return () => clearTimeout(timeoutId);
-  }, []); // Dépendance vide pour que cela ne se déclenche qu'une fois au démarrage
+    handleSVGChange();
+  }, [currentSVG, handleSVGChange]);
 
-  // Animation de la couleur de fond
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentSVG(prev => (prev + 1) % svgUrls.length);
+    }, 10000); // Change toutes les 10 secondes
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const { color } = useSpring({ color: colors[currentSVG] });
 
   const transitions = useTransition(shapes, {
@@ -93,13 +90,11 @@ function Scene() {
 
   return (
     <>
-      {/* Fond dynamique */}
       <a.mesh scale={[20000, 20000, 1]} rotation={[0, THREE.MathUtils.degToRad(-20), 0]}>
         <planeGeometry attach="geometry" args={[1, 1]} />
         <a.meshPhongMaterial attach="material" color={color} depthTest={false} />
       </a.mesh>
 
-      {/* SVGs animés */}
       <group position={[1600, -700, 0]} rotation={[0, THREE.MathUtils.degToRad(180), 0]}>
         {transitions((props, item) => (
           <Shape key={item.shape.uuid} {...item} {...props} />
@@ -125,7 +120,7 @@ function About() {
         <spotLight intensity={0.5} position={[300, 300, 4000]} />
         <Scene />
       </Canvas>
-      <span class="header-about">Damien Cuvillier</span>
+      <span className="header-about">Damien Cuvillier</span>
     </div>
   );
 }
