@@ -9,34 +9,45 @@ import { ShapeGeometry } from 'three';
 import { extend } from '@react-three/fiber';
 import { useSpring } from 'react-spring';
 
-// Liste des fichiers SVG
-const svgNames = ['city', 'morning', 'woods', 'beach'];
+const svgNames = ['city', 'woods', 'beach','morning'];
 const svgUrls = svgNames.map(name => `/images/svg/${name}.svg`);
+
+const svgDimensions = { 
+  city: [5, 5, 5], 
+  morning: [2, 2, 2], 
+  woods: [1, 1, 1], 
+  beach: [5, 5, 5], 
+};
 
 extend({ ShapeGeometry });
 
-function Shape({ shape, position, color, opacity, index }) {
+function Shape({ shape, position, color, opacity, index, scale }) {
   const transformPosition = index === 0 ? [position[0] + 100, position[1] + 100, position[2]] : position;
   return (
-    <a.mesh
-      position={transformPosition}
-      scale={[2, 2, 2]}
-    >
+    <a.mesh position={transformPosition} scale={scale}>
       <a.meshPhongMaterial attach="material" color={color} opacity={opacity} side={THREE.DoubleSide} depthWrite={false} transparent />
       <primitive attach="geometry" object={new ShapeGeometry(shape)} />
     </a.mesh>
   );
 }
 
+const svgCache = {};
+
 const loadSVG = (svgUrl) => {
+  if (svgCache[svgUrl]) {
+    return Promise.resolve(svgCache[svgUrl]);
+  }
+
   return new Promise((resolve, reject) => {
     new SVGLoader().load(
       svgUrl,
       data => {
         if (data && data.paths) {
-          resolve(flatten(data.paths.map((path, index) =>
-            path.toShapes(true).map(shape => ({ shape, color: path.color, index })))
+          const shapes = flatten(data.paths.map((path, index) =>
+            path.toShapes(true).map(shape => ({ shape, color: path.color, index }))
           ));
+          svgCache[svgUrl] = shapes;
+          resolve(shapes);
         } else {
           reject(new Error('Failed to load SVG: No paths found'));
         }
@@ -49,6 +60,7 @@ const loadSVG = (svgUrl) => {
   });
 };
 
+let lastFrameTime = performance.now();
 function Scene() {
   const [shapes, setShapes] = useState([]);
   const [currentSVG, setCurrentSVG] = useState(0);
@@ -76,15 +88,39 @@ function Scene() {
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    function render() {
+      const currentTime = performance.now();
+      if (currentTime - lastFrameTime >= 16) { // 60 FPS
+        // Effectuer le rendu ici
+        lastFrameTime = currentTime;
+      }
+      requestAnimationFrame(render);
+    }
+    render();
+  }, []);
+
   const { color } = useSpring({ color: colors[currentSVG] });
 
   const transitions = useTransition(shapes, {
-    from: { position: [0, 50, -200], opacity: 0 },
-    enter: { position: [0, 0, 0], opacity: 1 },
-    leave: { position: [0, -50, 10], opacity: 0 },
+    from: ({ shape }) => ({
+      position: [500, 500, 200],
+      opacity: 0,
+      scale: svgDimensions[svgNames[currentSVG]] || [2, 2, 2]
+    }),
+    enter: ({ shape }) => ({
+      position: [-100, 0, 0],
+      opacity: 1,
+      scale: svgDimensions[svgNames[currentSVG]] || [2, 2, 2]
+    }),
+    leave: ({ shape }) => ({
+      position: [0, -50, 10],
+      opacity: 0,
+      scale: svgDimensions[svgNames[currentSVG]] || [2, 2, 2]
+    }),
     keys: item => item.shape.uuid,
-    trail: 2,
-    config: { mass: 1, tension: 180, friction: 12 },
+    trail: 0.5,
+    config: { mass: 10, tension: 400, friction: 50, precision: 0.0001 },
     lazy: true,
   });
 
@@ -117,7 +153,7 @@ function About() {
         style={{ display:'block', height:'955px', width:'100%', margin:'auto' }}
       >
         <ambientLight intensity={0.5} />
-        <spotLight intensity={0.5} position={[300, 300, 4000]} />
+        <spotLight intensity={0.5} position={[300, 300, 400]} />
         <Scene />
       </Canvas>
       <span className="header-about">Damien Cuvillier</span>

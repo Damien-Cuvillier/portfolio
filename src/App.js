@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import Header from './Components/Header';
 import About from './Components/About';
 import Projects from './Components/Projects';
@@ -7,6 +7,9 @@ import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
 import Competences from './Components/Competences'
+
+const SVGComponent = lazy(() => import('./Components/About'));
+
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
 
@@ -17,7 +20,9 @@ function App() {
         <Tetris />  
       ) : (
         <>
-          <About />
+        <Suspense fallback={<div>Loading...</div>}> 
+        <SVGComponent />
+        </Suspense>
           <Competences />
           <Projects />
           <ContactForm />
