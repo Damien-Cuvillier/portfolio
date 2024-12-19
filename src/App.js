@@ -1,6 +1,5 @@
 import React, { useState, Suspense, lazy } from 'react';
 import Header from './Components/Header';
-import About from './Components/About';
 import Projects from './Components/Projects';
 import Tetris from './Components/Tetris'; 
 import './App.css';

@@ -5,8 +5,8 @@ import '../App.css'
 
 function Projects() {
   return (
-    <section className='flex items-center flex-col' id="Competences">
-      <h2 className='text-3xl font-bold text-gray-800 px-5 py-5'>Mes Compétences</h2>
+    <section id="Competences" className='flex items-center flex-col py-24' >
+      <h2 className='text-3xl font-bold text-gray-800 py-2 border-t-2 border-gray-800'>Mes Compétences</h2>
       <div className="competences-grid py-24 w-full mw-12">
         <div className="competence-item flex flex-row justify-around w-full max-w-screen-2xl mx-auto relative">
           <div>
