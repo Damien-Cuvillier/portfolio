@@ -64,7 +64,7 @@ let lastFrameTime = performance.now();
 function Scene() {
   const [shapes, setShapes] = useState([]);
   const [currentSVG, setCurrentSVG] = useState(0);
-  const colors = ['#e3dcbc', '#ffbcb7', '#8bd8d2', '#CDE8E7'];
+  const colors = ['#f1cff7', '#96b4df', '#96dfab', '#ffc897'];
 
   const handleSVGChange = useCallback(async () => {
     const svgUrl = svgUrls[currentSVG];
@@ -152,7 +152,7 @@ function About() {
         }}
         style={{ display:'block', height:'955px', width:'100%', margin:'auto' }}
       >
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={1} />
         <directionalLight
           intensity={0.8}
           position={[-500, 500, 500]}

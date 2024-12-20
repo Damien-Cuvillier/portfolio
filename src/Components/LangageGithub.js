@@ -1,67 +1,92 @@
-// import React, { useState, useEffect } from 'react';
-// import { Bar } from 'react-chartjs-2';
-// import 'chart.js/auto';
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart, registerables } from 'chart.js';
 
-// const fetchGitHubRepos = async (username) => {
-//   const response = await fetch(`https://api.github.com/users/Damien-Cuvillier/repos`);
-//   const data = await response.json();
-//   return data;
-// };
+Chart.register(...registerables);
 
-// const fetchRepoLanguages = async (repoUrl) => {
-//   const response = await fetch(repoUrl);
-//   const data = await response.json();
-//   return data;
-// };
+const LangageGithub = ({ data = [] }) => {
+  if (!data || data.length === 0) {
+    return <p className="text-white"> </p>;
+  }
 
-// const LanguageChart = ({ languages }) => {
-//   const data = {
-//     labels: Object.keys(languages),
-//     datasets: [{
-//       label: 'Languages',
-//       data: Object.values(languages),
-//       backgroundColor: 'rgba(75,192,192,0.4)',
-//       borderColor: 'rgba(75,192,192,1)',
-//       borderWidth: 1,
-//     }]
-//   };
+  console.log('Données du graphique:', data);
 
-//   return (
-//     <div>
-//       <Bar data={data} />
-//     </div>
-//   );
-// };
+  const chartData = {
+    labels: data.map(entry => entry.name),
+    datasets: [
+      {
+        label: 'Pourcentage d\'utilisation',
+        data: data.map(entry => entry.value),
+        backgroundColor: ['#FF8042', '#0088FE', '#00C49F', '#FFBB28'],
+      },
+    ],
+  };
 
-// const Langage = ({ username }) => {
-//   const [repos, setRepos] = useState([]);
+  const options = {
+    indexAxis: 'y', // rend le graphique horizontal
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          display: false,
+        },
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        barThickness: 1, // Ajuste l'épaisseur des barres
+        maxBarThickness: 2, // Assure que l'épaisseur des barres ne dépasse pas 8px
+        categoryPercentage: 0.1, // Ajuste l'épaisseur des barres
+        barPercentage: 0.5, // Ajuste l'épaisseur des barres
+        ticks: {
+          font: {
+            size: 12,
+            family: 'Arial, sans-serif',
+            weight: 'bold',
+            color: '#333',
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        backgroundColor: '#000',
+        titleFont: {
+          size: 14,
+          family: 'Arial, sans-serif',
+          weight: 'bold',
+          color: '#FFF',
+        },
+        bodyFont: {
+          size: 12,
+          family: 'Arial, sans-serif',
+          color: '#FFF',
+        },
+        footerFont: {
+          size: 10,
+          family: 'Arial, sans-serif',
+          color: '#FFF',
+        },
+      },
+    },
+    layout: {
+      padding: 0,
+    },
+    maintainAspectRatio: false, // Assure que le graphique s'ajuste à son conteneur
+  };
 
-//   useEffect(() => {
-//     const getRepos = async () => {
-//       const reposData = await fetchGitHubRepos(username);
-//       const reposWithLanguages = await Promise.all(
-//         reposData.map(async (repo) => {
-//           const languages = await fetchRepoLanguages(repo.languages_url);
-//           return { ...repo, languages };
-//         })
-//       );
-//       setRepos(reposWithLanguages);
-//     };
+  return (
+    <div className="w-full flex justify-center mt-4 p-4">
+      <Bar data={chartData} options={options} style={{ backgroundColor: 'transparent' }} />
+    </div>
+  );
+};
 
-//     getRepos();
-//   }, [username]);
-
-//   return (
-//     <div className="language">
-//       {repos.map((repo) => (
-//         <div key={repo.id} className="language-item">
-//           <img src={repo.owner.avatar_url} alt={repo.name} />
-//           <h3 className='text-xl font-bold mt-4'>{repo.name}</h3>
-//           <LanguageChart languages={repo.languages} />
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default Langage;
+export default LangageGithub;
