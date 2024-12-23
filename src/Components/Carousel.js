@@ -76,8 +76,6 @@ const ProjectsCarousel = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-
-
   useEffect(() => {
     const fetchLanguages = async () => {
       const updatedRepos = await Promise.all(
@@ -118,26 +116,28 @@ const ProjectsCarousel = () => {
           <div className="bg-gray-100 max-w-full flex-col mx-auto h-full bg-gray-200" key={index}>
             <div className="relative">
               <img src={repo.imageUrl} alt={repo.title} className="w-full h-64 object-cover rounded-md" />
-              {repo.languageData && repo.languageData.length > 0 && (
-                <div className="absolute top-0 left-0 m-4 p-2 bg-transparent rounded-md">
-                  <LangageGithub data={repo.languageData} />
-                </div>
-              )}
             </div>
           </div>
         ))}
       </Carousel>
-      <div className="legend flex flex-col items-center bg-gray-200 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
-        {repos[currentSlide].projectURL && (
-          <a className="my-2 py-2 text-sm text-blue-500 hover:underline" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">
-            GitHub <FontAwesomeIcon icon={faGithub} />
-          </a>
-        )}
-        <div className="text-gray-700">
-          {repos[currentSlide].description.map((line, index) => (
-            <p key={index}>{line}</p>
-          ))}
+      <div className="legend flex flex-col md:flex-row items-center bg-gray-200 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
+        <div className="w-full md:w-1/2">
+          {repos[currentSlide].languageData && repos[currentSlide].languageData.length > 0 && (
+            <LangageGithub data={repos[currentSlide].languageData} />
+          )}
+        </div>
+        <div className="w-full md:w-1/2 mt-4 md:mt-0 md:ml-4">
+          <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
+          {repos[currentSlide].projectURL && (
+            <a className="my-2 py-2 text-sm text-blue-500 hover:underline" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">
+              GitHub <FontAwesomeIcon icon={faGithub} />
+            </a>
+          )}
+          <div className="text-gray-700">
+            {repos[currentSlide].description.map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+          </div>
         </div>
       </div>
     </>

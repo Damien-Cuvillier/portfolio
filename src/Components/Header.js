@@ -25,7 +25,7 @@ function Header({ interactiveMode, setInteractiveMode }) {
             <FontAwesomeIcon icon={faGithub} />
           </a>
           <button
-            className=" ml-20 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className=" ml-20 px-4 py-2 bg-blue-400 text-white rounded hover:bg-blue-600"
             onClick={() => setInteractiveMode(prev => !prev)}
           >
             {interactiveMode ? 'Mode classique' : 'Mode interactif'}
