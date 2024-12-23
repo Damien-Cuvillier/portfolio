@@ -7,7 +7,7 @@ import './tailwind.css';
 import ContactForm from './Components/Footer';
 import Competences from './Components/Competences'
 
-const SVGComponent = lazy(() => import('./Components/About'));
+const SVGComponent = lazy(() => import('./Components/SliderSVG'));
 
 function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);

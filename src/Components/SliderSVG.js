@@ -10,7 +10,7 @@ import { extend } from '@react-three/fiber';
 import { useSpring } from 'react-spring';
 
 const svgNames = ['city', 'woods', 'beach','morning'];
-const svgUrls = svgNames.map(name => `/images/svg/${name}.svg`);
+const svgUrls = svgNames.map(name => process.env.PUBLIC_URL + `/images/svg/${name}.svg`);
 
 const svgDimensions = { 
   city: [5, 5, 5], 
@@ -166,9 +166,8 @@ function About() {
           shadow-camera-bottom={-500}
           castShadow
         />
-        
         <spotLight
-          color={new THREE.Color('white')} // Change la couleur si nécessaire
+          color={new THREE.Color('white')}
           intensity={1.5}
           position={[-100, 500, 500]}
           angle={0.5}
@@ -178,13 +177,15 @@ function About() {
           shadow-mapSize-height={2048}
           shadow-camera-near={0.5}
           shadow-camera-far={500}
-/>
-
+        />
         <Scene />
       </Canvas>
-      <span className="header-about">Damien Cuvillier</span>
+      <p className="header-about">
+        <span className="name text-6xl font-bold text-blue-100">Damien Cuvillier</span><br/>
+        <span className="role text-5xl font-bold text-blue-100 mb-4">Développeur web</span><br/>
+        <span className="description text-xl text-blue-100 mt-4">Ensemble, réalisons des projets innovants.<br/> À distance ou sur site, je suis prêt à relever de nouveaux défis.</span>
+      </p>
     </div>
   );
 }
-
-export default About;
+export default About
