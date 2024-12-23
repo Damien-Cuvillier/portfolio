@@ -115,7 +115,7 @@ const ProjectsCarousel = () => {
         onChange={(index) => setCurrentSlide(index)}
       >
         {repos.map((repo, index) => (
-          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full" key={index}>
+          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full bg-gray-200" key={index}>
             <div className="relative">
               <img src={repo.imageUrl} alt={repo.title} className="w-full h-64 object-cover rounded-md" />
               {repo.languageData && repo.languageData.length > 0 && (
@@ -127,7 +127,7 @@ const ProjectsCarousel = () => {
           </div>
         ))}
       </Carousel>
-      <div className="legend flex flex-col items-center bg-white p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
+      <div className="legend flex flex-col items-center bg-gray-200 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
         <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
         {repos[currentSlide].projectURL && (
           <a className="my-2 py-2 text-sm text-blue-500 hover:underline" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">

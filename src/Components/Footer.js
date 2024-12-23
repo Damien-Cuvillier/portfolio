@@ -47,7 +47,7 @@ const ContactForm = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <div className='mt-20 pb-12'>
+        <div className='pt-20 pb-12 bg-gray-200'>
           <Form className="w-full max-w-sm mx-auto">
             <h2 id='contacts' className='text-3xl font-bold text-gray-800 px-5 py-5'>Contactez moi !</h2>
             <p className='font-bold text-gray-800 pb-5'>Des questions ou des projets en vue ? Envoyez-moi simplement un message !</p>

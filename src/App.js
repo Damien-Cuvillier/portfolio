@@ -6,6 +6,7 @@ import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
 import Competences from './Components/Competences'
+import AboutScene from './Components/AboutScene';
 
 const SVGComponent = lazy(() => import('./Components/SliderSVG'));
 
@@ -22,6 +23,7 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}> 
         <SVGComponent />
         </Suspense>
+          <AboutScene />
           <Competences />
           <Projects />
           <ContactForm />

@@ -47,7 +47,8 @@ p.header-about {
   width: 500px;
   line-height: 0.9em;
   top: 250px;
-  left: 150px;
+  left: 335px;
+  text-align: left;
 }
 
 div.header-about-major > span {

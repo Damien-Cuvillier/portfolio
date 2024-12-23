@@ -142,7 +142,7 @@ function Scene() {
 
 function About() {
   return (
-    <div id='about' className="about w-full h-full">
+    <div className="about w-full h-full">
       <Canvas
         camera={{
           fov: 80,
@@ -182,7 +182,7 @@ function About() {
       </Canvas>
       <p className="header-about">
         <span className="name text-6xl font-bold text-blue-100">Damien Cuvillier</span><br/>
-        <span className="role text-5xl font-bold text-blue-100 mb-4">Développeur web</span><br/>
+        <span className="role text-3xl font-bold text-blue-100 mb-4">Développeur web</span><br/>
         <span className="description text-xl text-blue-100 mt-4">Ensemble, réalisons des projets innovants.<br/> À distance ou sur site, je suis prêt à relever de nouveaux défis.</span>
       </p>
     </div>
