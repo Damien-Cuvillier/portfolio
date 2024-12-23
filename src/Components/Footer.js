@@ -3,6 +3,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import emailjs from 'emailjs-com';
 
+const EMAILJS_TOKEN = process.env.EMAILJS_TOKEN;
+const SERVICEID= process.env.SERVICEID;
+const TEMPLATEID= process.env.TEMPLATEID;
+
 const ContactForm = () => {
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
@@ -11,9 +15,9 @@ const ContactForm = () => {
   });
 
   const sendEmail = (values, resetForm, setSubmitting) => {
-    const serviceID = 'service_m2g5q52';
-    const templateID = 'template_62cyve1';
-    const userID = 'NYio9ja9B2HpfjeXl';
+    const serviceID = SERVICEID;
+    const templateID = TEMPLATEID;
+    const userID = EMAILJS_TOKEN;
 
     const templateParams = {
       name: values.name,
