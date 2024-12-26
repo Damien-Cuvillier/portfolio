@@ -52,7 +52,7 @@ const projects = [
     description: [
       'Développement du back-end d\'un site de notation de livres.',
       'Dans ce projet je devais créer un serveur avec Express et de le connecter à une base de données MongoDB, développer les modèles de données et implémenter des opérations CRUD pour la gestion des livres et des notations, implémenter un système d\'authentification sécurisé pour les utilisateurs du site.',
-      'Je devais prendre en compte la gestion du téléchargement et de l\'optimisation des images, ainsi que l\'ajout de fonctionnalités pour noter les livres et calculer la note moyenne. Je devais aussi respecter les bonnes pratiques du Green Code pour réduire l\'empreinte écologique du site et utiliser Mongoose pour modéliser les données MongoDB',
+      'Je devais prendre en compte la gestion du téléchargement et de l\'optimisation des images, ainsi que l\'ajout de fonctionnalités pour noter les livres et calculer la note moyenne et respecter les bonnes pratiques du Green Code.',
     ],
       imageUrl: process.env.PUBLIC_URL + '/images/Grimoire.webp',
     projectURL:'https://github.com/Damien-Cuvillier/P6_Grimoire'
@@ -70,10 +70,8 @@ const projects = [
   },
   // Ajouter plus de projets ici
 ];
-
 const ProjectsCarousel = () => {
   const [repos, setRepos] = useState(projects.map(project => ({ ...project, languageData: [] })));
-
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -103,6 +101,12 @@ const ProjectsCarousel = () => {
     fetchLanguages();
   }, []);
 
+  useEffect(() => {
+    console.log('Current repos:', repos);
+    console.log('Current slide:', currentSlide);
+    console.log('Current repo projectURL:', repos[currentSlide]?.projectURL);
+  }, [repos, currentSlide]);
+
   return (
     <>
       <Carousel 
@@ -113,33 +117,38 @@ const ProjectsCarousel = () => {
         onChange={(index) => setCurrentSlide(index)}
       >
         {repos.map((repo, index) => (
-          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full bg-gray-100" key={index}>
+          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full" key={index}>
             <div className="relative">
               <img src={repo.imageUrl} alt={repo.title} className="w-full h-64 object-cover rounded-md" />
             </div>
           </div>
-        ))}7
+        ))}
       </Carousel>
-      <div className="legend flex flex-col md:flex-row items-center bg-gray-100 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
-        <div className="w-full md:w-1/2">
-          {repos[currentSlide].languageData && repos[currentSlide].languageData.length > 0 && (
-            <LangageGithub data={repos[currentSlide].languageData} />
-          )}
-        </div>
-        <div className="w-full md:w-1/2 mt-4 md:mt-0 md:ml-4">
-          <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
+      {repos[currentSlide] && (
+        <div className={`legend flex flex-col ${repos[currentSlide].projectURL ? "md:flex-row" : "justify-center"} items-center bg-gray-100 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto h-96`}>
           {repos[currentSlide].projectURL && (
-            <a className="my-2 py-2 text-sm text-blue-500 hover:underline" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">
-              GitHub <FontAwesomeIcon icon={faGithub} />
-            </a>
+            <div className="w-full md:w-1/2">
+              <a className="my-2 py-2 text-sm text-gray-800 font-bold hover:underline relative" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">
+                GitHub <FontAwesomeIcon icon={faGithub} />
+              </a>
+              {repos[currentSlide].languageData.length > 0 && (
+                <LangageGithub data={repos[currentSlide].languageData} />
+              )}
+            </div>
           )}
-          <div className="text-gray-700">
-            {repos[currentSlide].description.map((line, index) => (
-              <p key={index}>{line}</p>
-            ))}
+          <div className={`w-full ${repos[currentSlide].projectURL ? "md:w-1/2 mt-4 md:mt-0 md:ml-4" : "text-center"}`}>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
+            
+            {repos[currentSlide].description && (
+              <ul className="list-disc list-inside text-gray-600">
+                {repos[currentSlide].description.map((desc, descIndex) => (
+                  <li key={descIndex}>{desc}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -1,8 +1,9 @@
-// src/Components/githubAPI.js
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 if (!GITHUB_TOKEN) {
   console.error("GitHub token is missing! Please check your .env file.");
+} else {
+  console.log("GitHub token loaded:", GITHUB_TOKEN); // Ajouter un log pour vérifier que le token est bien chargé
 }
 
 export const fetchRepoLanguages = async (repoUrl) => {
@@ -21,6 +22,6 @@ export const fetchRepoLanguages = async (repoUrl) => {
     return data;
   } catch (error) {
     console.error(error.message);
-    throw error;
+    return {}; // Retourne un objet vide en cas d'erreur
   }
 };
