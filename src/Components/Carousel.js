@@ -113,14 +113,14 @@ const ProjectsCarousel = () => {
         onChange={(index) => setCurrentSlide(index)}
       >
         {repos.map((repo, index) => (
-          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full bg-gray-200" key={index}>
+          <div className="bg-gray-100 max-w-full flex-col mx-auto h-full bg-gray-100" key={index}>
             <div className="relative">
               <img src={repo.imageUrl} alt={repo.title} className="w-full h-64 object-cover rounded-md" />
             </div>
           </div>
-        ))}
+        ))}7
       </Carousel>
-      <div className="legend flex flex-col md:flex-row items-center bg-gray-200 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
+      <div className="legend flex flex-col md:flex-row items-center bg-gray-100 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto">
         <div className="w-full md:w-1/2">
           {repos[currentSlide].languageData && repos[currentSlide].languageData.length > 0 && (
             <LangageGithub data={repos[currentSlide].languageData} />
