@@ -5,6 +5,22 @@
 .App {
   text-align: center;
 }
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#main-container {
+  overflow: hidden;
+  height: 100%;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* src/Components/Tetris.scss */
 .tetris-container {
@@ -139,10 +155,10 @@
   object-fit: scale-down; 
 }
 
-.carousel .legend {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+.legend {
+ 
   padding: 10px;
+  height: 350px;
 }
 
 .carousel .legend h3 {
@@ -220,4 +236,41 @@ margin:auto;
   100% {
     left: 0; /* Retourne à gauche */
   }
+}
+/* Locomotive Scroll Styles */
+[data-scroll-container] {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  will-change: transform;
+}
+
+.has-scroll-smooth [data-scroll-container] > * {
+  position: relative;
+}
+
+.has-scroll-smooth [data-scroll-section] {
+  position: relative;
+  display: block;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  display: flex;
+  white-space: nowrap;
+  height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] > * {
+  white-space: normal;
+  display: inline-block;
+  height: 100%;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-section] {
+  height: 100%;
+}
+
+[data-scroll-sticky] {
+  position: sticky;
 }

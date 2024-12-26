@@ -32,7 +32,7 @@ const projects = [
       'Débuggage et optimisation d\'un site de photographe.',
       'Dans ce projet je devais optimiser le référencement du site, en améliorant sa performance et son accessibilité.', 
       'Je devais identifier les problèmes de chargement et de référencement avec des outils comme Lighthouse ou Wave pour évaluer les performances du site et son accessibilité.',
-      'A la suite d\'analyse, je devais élaborer des recommandations pour améliorer la vitesse de chargement, la structure du code et le référencement que j\'illustrais dans un rapport.',
+      'Je devais élaborer des recommandations pour améliorer la vitesse de chargement, la structure du code et le référencement, dans un rapport.',
     ],
     imageUrl: process.env.PUBLIC_URL + '/images/Nina.webp',
     projectURL: 'https://github.com/Damien-Cuvillier/P4-Nina-Carducci'
@@ -51,8 +51,8 @@ const projects = [
     title: 'Mon vieux grimoire',
     description: [
       'Développement du back-end d\'un site de notation de livres.',
-      'Dans ce projet je devais créer un serveur avec Express et de le connecter à une base de données MongoDB, développer les modèles de données et implémenter des opérations CRUD pour la gestion des livres et des notations, implémenter un système d\'authentification sécurisé pour les utilisateurs du site.',
-      'Je devais prendre en compte la gestion du téléchargement et de l\'optimisation des images, ainsi que l\'ajout de fonctionnalités pour noter les livres et calculer la note moyenne et respecter les bonnes pratiques du Green Code.',
+      'Dans ce projet je devais créer un serveur avec Express et de le connecter à une base de données MongoDB, développer les modèles de données et implémenter la gestion des livres et des notations, implémenter un système d\'authentification sécurisé pour les utilisateurs du site.',
+      'Je devais prendre en compte la gestion du téléchargement et de l\'optimisation des images, et respecter les bonnes pratiques du Green Code.',
     ],
       imageUrl: process.env.PUBLIC_URL + '/images/Grimoire.webp',
     projectURL:'https://github.com/Damien-Cuvillier/P6_Grimoire'
@@ -125,7 +125,7 @@ const ProjectsCarousel = () => {
         ))}
       </Carousel>
       {repos[currentSlide] && (
-        <div className={`legend flex flex-col ${repos[currentSlide].projectURL ? "md:flex-row" : "justify-center"} items-center bg-gray-100 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto h-96`}>
+        <div className={`legend flex flex-col ${repos[currentSlide].projectURL ? "md:flex-row" : "justify-center"} items-center bg-gray-100 p-4 rounded-md shadow-md mt-4 h-auto w-full max-w-3xl mx-auto h-1/2 pb-24`}>
           {repos[currentSlide].projectURL && (
             <div className="w-full md:w-1/2">
               <a className="my-2 py-2 text-sm text-gray-800 font-bold hover:underline relative" href={repos[currentSlide].projectURL} target="_blank" rel="noopener noreferrer">
