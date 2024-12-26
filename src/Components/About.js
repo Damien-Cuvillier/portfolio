@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Planet.css';
 
 const TestimonialSection = () => {
+  console.log('Rendered: About Component');
   return (
     <section className="section testimonial tf8-position-relative tf8-z-index-1 tf8-padding-y-2xl bg-gray-200">
       <div id="about" className="tf8-container tf8-max-width-adaptive-sm py-16">

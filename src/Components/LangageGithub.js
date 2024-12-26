@@ -9,7 +9,7 @@ const LangageGithub = ({ data = [] }) => {
     return <p className="text-white"> </p>;
   }
 
-  console.log('Données du graphique:', data);
+  
 
   const chartData = {
     labels: data.map(entry => entry.name),

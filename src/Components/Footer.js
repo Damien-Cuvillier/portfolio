@@ -27,12 +27,12 @@ const ContactForm = () => {
 
     emailjs.send(serviceID, templateID, templateParams, userID)
       .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
+        
         alert('Message envoyé avec succès !');
         resetForm();
         setSubmitting(false);
       }, (error) => {
-        console.log('FAILED...', error);
+        
         alert('Échec de l\'envoi du message, veuillez réessayer.');
         setSubmitting(false);
       });

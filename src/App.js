@@ -6,7 +6,7 @@ import './App.css';
 import './tailwind.css';
 import ContactForm from './Components/Footer';
 import Competences from './Components/Competences';
-import About from './Components/About'
+import About from './Components/About';
 
 const SVGComponent = lazy(() => import('./Components/SliderSVG'));
 

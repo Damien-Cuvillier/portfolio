@@ -81,14 +81,14 @@ const ProjectsCarousel = () => {
           if (project.projectURL) {
             const repoName = project.projectURL.split('/').pop();
             const languages = await fetchRepoLanguages(`https://api.github.com/repos/Damien-Cuvillier/${repoName}/languages`);
-            console.log('Langues récupérées pour', repoName, languages);
+           
 
             const totalBytes = Object.values(languages).reduce((a, b) => a + b, 0);
             const languageData = Object.keys(languages).map(key => ({
               name: key,
               value: parseFloat(((languages[key] / totalBytes) * 100).toFixed(2)),
             }));
-            console.log('Données de langages formattées:', languageData);
+            
 
             return { ...project, languageData };
           }
@@ -102,9 +102,7 @@ const ProjectsCarousel = () => {
   }, []);
 
   useEffect(() => {
-    console.log('Current repos:', repos);
-    console.log('Current slide:', currentSlide);
-    console.log('Current repo projectURL:', repos[currentSlide]?.projectURL);
+   
   }, [repos, currentSlide]);
 
   return (
