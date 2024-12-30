@@ -108,39 +108,57 @@ const TetrisComponent = () => {
       setPreviousLinesCleared(currentLinesCleared);
     }
   }, [currentLinesCleared, gameState, unlockedProjects, previousLinesCleared]);
-
+  useEffect(() => {
+    if (selectedProject && gameController) {
+      gameController.pause();
+    }
+  }, [selectedProject, gameController]);
+  
   // Modal Component
   const ProjectModal = ({ project, onClose }) => {
     if (!project) return null;
-
+  
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <div 
+          className="bg-white rounded-lg p-6 max-w-4xl w-full mx-4"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex justify-between items-start mb-4">
             <h3 className="text-2xl font-bold text-gray-800">{project.title}</h3>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <button 
+              onClick={onClose} 
+              className="text-gray-500 hover:text-gray-700 transition-colors"
+            >
               <FontAwesomeIcon icon={faTimes} className="text-xl" />
             </button>
           </div>
-          <img 
-            src={project.imageUrl} 
-            alt={project.title}
-            className="w-full h-64 object-cover rounded-lg mb-4"
-          />
-          <div className="space-y-2">
+          <div className="modal-image-container mb-4">
+            <img 
+              src={project.imageUrl} 
+              alt={project.title}
+              className="w-full rounded-lg object-contain max-h-[60vh]"
+            />
+          </div>
+          <div className="space-y-4">
             {project.description.map((paragraph, index) => (
               <p key={index} className="text-gray-600">{paragraph}</p>
             ))}
           </div>
           {project.projectURL && (
-            <a
-              href={project.projectURL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Voir sur GitHub
-            </a>
+            <div className="mt-6">
+              <a
+                href={project.projectURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Voir sur GitHub
+              </a>
+            </div>
           )}
         </div>
       </div>
