@@ -16,6 +16,34 @@ function App() {
   const [interactiveMode, setInteractiveMode] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
+const verifyGitHubToken = async () => {
+  try {
+    const response = await fetch('https://api.github.com/user', {
+      headers: {
+        'Authorization': `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+      }
+    });
+
+    if (!response.ok) {
+      console.error('GitHub token verification failed:', response.status);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Error verifying GitHub token:', error);
+    return false;
+  }
+};
+
+// Utilisez cette fonction au démarrage
+useEffect(() => {
+  verifyGitHubToken().then(isValid => {
+    if (!isValid) {
+      console.error('GitHub token is invalid or expired');
+    }
+  });
+}, []);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
