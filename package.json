@@ -44,7 +44,7 @@
   "homepage": "https://damien-cuvillier.github.io/portfolio",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-portfolio -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
