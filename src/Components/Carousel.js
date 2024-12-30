@@ -116,7 +116,7 @@ const ProjectsCarousel = () => {
       >
         {repos.map((repo, index) => (
           <div className="bg-gray-100 max-w-full flex-col mx-auto h-full" key={index}>
-            <div className="relative">
+            <div className="relative pb-8">
               <img src={repo.imageUrl} alt={repo.title} className="w-full h-64 object-cover rounded-md" />
             </div>
           </div>
