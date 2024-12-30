@@ -5,14 +5,14 @@ const FullPageScroll = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlePageChange = number => {
-    setCurrentPage(number);
-    window.dispatchEvent(new CustomEvent('sectionChange', { 
-      detail: { 
-        currentPage: number,
-        isProjectSection: number === 3
-      }
-    }));
-  };
+  setCurrentPage(number);
+  window.dispatchEvent(new CustomEvent('sectionChange', { 
+    detail: { 
+      currentPage: number,
+      isProjectSection: number === 3 || number === 4 // Modifié pour inclure la section Contact
+    }
+  }));
+};
 
   // Gestionnaire pour la navigation depuis le header
   const handleHeaderNavigation = (pageNumber) => {

@@ -91,11 +91,12 @@
 }
 
 .piece-preview {
-  background-color: #eee;
+  background-color: #c2c2c2;
+  opacity: 0.5;
 }
 .points{
   position:absolute;
-  top:235px;
+  top:150px;
   display:flex;
   justify-content: space-between;
   width: 600px;

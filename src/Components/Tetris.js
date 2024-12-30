@@ -33,9 +33,9 @@ const TetrisComponent = () => {
   }, [gameState, gameController]);
 
   return (
-    <div className="tetris-container bg-gray-100 py-1">
+    <div className="tetris-container bg-white py-1 mt-12">
       <h2 className='text-2xl font-bold text-gray-800 px-5 py-5 pr-7'>
-        <FontAwesomeIcon icon={faGamepad} /> Tetris Game <FontAwesomeIcon icon={faGamepad} />
+        <FontAwesomeIcon icon={faGamepad} /> Tetris <FontAwesomeIcon icon={faGamepad} />
       </h2>
       <Tetris
         keyboardControls={{
@@ -105,7 +105,7 @@ const TetrisComponent = () => {
               </div>
               <button
                 onClick={() => gameController && gameController.restart()}
-                className="restart-button text-gray-600 mt-5 bg-green-200 text-white py-2 px-4 rounded"
+                className="restart-button text-gray-800 font-bold mt-5 bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded"
               >
                 Rejouer
               </button>

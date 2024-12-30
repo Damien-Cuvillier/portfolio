@@ -87,7 +87,7 @@ function Header({ interactiveMode, setInteractiveMode, currentPage }) {
           </div>
           <button
             className={`px-6 py-2 rounded transition-all duration-300 whitespace-nowrap ${
-              isProjectVisible ? 'sparkle-effect' : 'bg-blue-400 hover:bg-blue-600 text-white'
+              isProjectVisible ? 'sparkle-effect' : 'bg-blue-400 hover:bg-blue-600 text-gray-800 font-bold'
             }`}
             onClick={() => setInteractiveMode(prev => !prev)}
           >

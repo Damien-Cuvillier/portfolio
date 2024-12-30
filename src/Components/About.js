@@ -35,9 +35,9 @@ const TestimonialSection = () => {
           <p className="tf8-color-contrast-medium tf8-margin-top-4xs">Développeur web</p>
           <figure className="tf8-flex tf8-justify-center tf8-margin-bottom-md reveal-fx reveal-fx--scale mt-12">
             <img
-              className="tf8-block tf8-width-2xl tf8-height-2xl tf8-radius-50% tf8-border tf8-border-bg tf8-border-2 tf8-shadow-sm rounded-full"
-              src={process.env.PUBLIC_URL + '/images/logo.jpg'}
-              alt="Logo"
+              className="tf8-block tf8-width-2xl tf8-height-2xl tf8-radius-50% tf8-border tf8-border-bg tf8-border-2 tf8-shadow-sm rounded-full object-cover"
+              src={process.env.PUBLIC_URL + '/images/photo_Damien.webp'}
+              alt="Damien Cuvillier"
             />
           </figure>
         </div>
