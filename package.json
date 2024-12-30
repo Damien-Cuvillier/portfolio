@@ -29,6 +29,7 @@
     "react-dom": "^18.3.1",
     "react-mega-scroll": "^1.0.17",
     "react-modal": "^3.16.1",
+    "react-page-scroller": "^3.0.1",
     "react-responsive-carousel": "^3.2.23",
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.5",

@@ -8,9 +8,16 @@ if (!GITHUB_TOKEN) {
 
 export const fetchRepoLanguages = async (repoUrl) => {
   try {
+    // Vérifions que le token est bien chargé
+    if (!GITHUB_TOKEN) {
+      throw new Error("GitHub token is not configured");
+    }
+
     const response = await fetch(repoUrl, {
       headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'X-GitHub-Api-Version': '2022-11-28'
       }
     });
 
@@ -21,7 +28,7 @@ export const fetchRepoLanguages = async (repoUrl) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error.message);
-    return {}; // Retourne un objet vide en cas d'erreur
+    console.error('Error fetching repo languages:', error.message);
+    return {};
   }
 };

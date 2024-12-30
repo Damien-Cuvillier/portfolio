@@ -138,7 +138,7 @@ const ProjectsCarousel = () => {
             <h3 className="text-xl font-bold text-gray-800 mb-2">{repos[currentSlide].title}</h3>
             
             {repos[currentSlide].description && (
-              <ul className="list-disc list-inside text-gray-600">
+              <ul className="list-disc list-inside text-gray-600 text-sm">
                 {repos[currentSlide].description.map((desc, descIndex) => (
                   <li key={descIndex}>{desc}</li>
                 ))}
